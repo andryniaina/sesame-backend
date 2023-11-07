@@ -1,0 +1,17 @@
+version: '3'
+ 
+services:
+  db:
+    image: mysql/mysql-server:5.7.36-1.2.6-server
+    container_name: sesame_db
+    environment:
+      MYSQL_ROOT_PASSWORD: sesame
+      MYSQL_DATABASE: sesame
+      MYSQL_USER: sesame
+      MYSQL_PASSWORD: sesame
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+volumes:
+  dbdata:
