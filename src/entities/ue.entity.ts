@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { Ec } from "./ec.entity";
-// Schema de la table sesamien
+
+// Schema de la table ue
 @Entity()
 export class Ue {
   @PrimaryGeneratedColumn("uuid")

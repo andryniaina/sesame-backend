@@ -28,7 +28,7 @@ export const createEcHandler = asyncHandler(
   }
 );
 
-// API de mise à jour d'un sesamein
+// API de mise à jour d'un ec
 export const updateEcHandler = asyncHandler(
   async (req: Request, res: Response) => {
     try {
@@ -41,13 +41,13 @@ export const updateEcHandler = asyncHandler(
 
       if (!isValidOperation) {
         res.status(400);
-        throw new Error("Mise à jour invalide");
+        throw "Mise à jour invalide";
       }
       const input = {};
       updates.forEach((update) => (input[update] = req.body[update]));
 
       const ec = await updateEc(id, input);
-      res.status(201).json(ec);
+      res.status(200).json(ec);
     } catch (error) {
       throw new Error(error);
     }

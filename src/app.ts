@@ -7,7 +7,8 @@ import cors from "cors";
 import { errorHandler } from "./middlewares/errorMiddleware";
 import sesamienRouter from "./routes/sesamien.routes";
 import ueRouter from "./routes/ue.routes";
-import ecRouter from "./routes/ec.routes"
+import ecRouter from "./routes/ec.routes";
+import gradeRouter from "./routes/grade.routes";
 
 // Initialisation de la connexion à la base de données
 AppDataSource.initialize()
@@ -26,8 +27,9 @@ AppDataSource.initialize()
 
     // Routes des différents APIs
     app.use("/api/sesamien", sesamienRouter);
-    app.use("/api/ue",ueRouter);
-    app.use("/api/ec",ecRouter);
+    app.use("/api/ue", ueRouter);
+    app.use("/api/ec", ecRouter);
+    app.use("/api/grade", gradeRouter);
 
     // Utilisation du middleware de gestion d'erreur
     app.use(errorHandler);

@@ -23,7 +23,7 @@ export const createUeHandler = asyncHandler(
   }
 );
 
-// API de mise à jour d'un sesamein
+// API de mise à jour d'un ue
 export const updateUeHandler = asyncHandler(
   async (req: Request, res: Response) => {
     try {
@@ -36,13 +36,13 @@ export const updateUeHandler = asyncHandler(
 
       if (!isValidOperation) {
         res.status(400);
-        throw new Error("Mise à jour invalide");
+        throw "Mise à jour invalide";
       }
       const input = {};
       updates.forEach((update) => (input[update] = req.body[update]));
 
       const ue = await updateUe(id, input);
-      res.status(201).json(ue);
+      res.status(200).json(ue);
     } catch (error) {
       throw new Error(error);
     }

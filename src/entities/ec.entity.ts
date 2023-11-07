@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "typeorm";
 import { Ue } from "./ue.entity";
+import { Grade } from "./grade.entity";
 
-// Schema de la table sesamien
+// Schema de la table ec
 @Entity()
 export class Ec {
   @PrimaryGeneratedColumn("uuid")
@@ -12,4 +13,7 @@ export class Ec {
 
   @ManyToOne(() => Ue, (ue) => ue.ecs, {onDelete:'CASCADE'})
   ue: Ue
+
+  @OneToMany(() => Grade, (grade) => grade.sesamien)
+  grades: Grade[]
 }

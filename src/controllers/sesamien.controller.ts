@@ -51,13 +51,13 @@ export const updateSesamienHandler = asyncHandler(
 
       if (!isValidOperation) {
         res.status(400);
-        throw new Error("Mise à jour invalide");
+        throw "Mise à jour invalide";
       }
       const input = {};
       updates.forEach((update) => (input[update] = req.body[update]));
 
       const sesamien = await updateSesamien(id, input);
-      res.status(201).json(sesamien);
+      res.status(200).json(sesamien);
     } catch (error) {
       throw new Error(error);
     }

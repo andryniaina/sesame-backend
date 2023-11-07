@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Grade } from "./grade.entity";
 
 // Schema de la table sesamien
 @Entity()
@@ -26,4 +27,7 @@ export class Sesamien {
 
   @Column()
   promotion: string;
+
+  @OneToMany(() => Grade, (grade) => grade.sesamien)
+  grades: Grade[]
 }
