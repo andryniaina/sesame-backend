@@ -10,10 +10,10 @@ import sesamienRouter from "./routes/sesamien.routes";
 // Initialisation de la connexion à la base de données
 AppDataSource.initialize()
   .then(() => {
-    console.log("Data Source has been initialized!");
+    console.log("Connexion à la base de données réussie");
   })
   .catch((err) => {
-    console.error("Error during Data Source initialization:", err);
+    console.error("Erreur lors de la connexion à la base de donnée:", err);
   });
 
 // Creation de l'application Express
@@ -35,5 +35,5 @@ app.use(errorHandler);
 
 // Lancement de l'application
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`API Server actif sur le port ${port}`);
 });
