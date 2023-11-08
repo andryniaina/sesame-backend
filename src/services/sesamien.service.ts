@@ -29,16 +29,24 @@ export const findSesamienFullGradesInfo = async (id: string) => {
     relations: {
       grades: {
         ec: {
-          ue: true
-        }
-      }
+          ue: true,
+        },
+      },
     },
   });
 };
 
 // Service de recherche de tous les sesamiens
 export const findAllSesamien = async () => {
-  return await sesamienRepository.find();
+  return await sesamienRepository.find({
+    relations: {
+      grades: {
+        ec: {
+          ue: true,
+        },
+      },
+    },
+  });
 };
 
 // Service de suppression d'un sesamien
