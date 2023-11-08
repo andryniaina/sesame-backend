@@ -2,7 +2,7 @@
 const dotenv = require("dotenv").config();
 
 import express from "express";
-import { AppDataSource } from "./utils/app-data-source";
+import { AppDataSource } from "./config/app-data-source";
 import cors from "cors";
 import { errorHandler } from "./middlewares/errorMiddleware";
 import sesamienRouter from "./routes/sesamien.routes";

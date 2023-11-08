@@ -1,5 +1,5 @@
 import { Ue } from "../entities/ue.entity";
-import { AppDataSource } from "../utils/app-data-source";
+import { AppDataSource } from "../config/app-data-source";
 
 // Connexion à la table ue
 const ueRepository = AppDataSource.getRepository(Ue);

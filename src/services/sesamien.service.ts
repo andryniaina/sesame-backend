@@ -1,5 +1,5 @@
 import { Sesamien } from "../entities/sesamien.entity";
-import { AppDataSource } from "../utils/app-data-source";
+import { AppDataSource } from "../config/app-data-source";
 
 // Connexion à la table sesamien
 const sesamienRepository = AppDataSource.getRepository(Sesamien);
@@ -18,6 +18,22 @@ export const updateSesamien = async (id: string, input: Partial<Sesamien>) => {
 // Service de recherche d'un sesamien à partir de son id
 export const findSesamienById = async (id: string) => {
   return await sesamienRepository.findOneBy({ id });
+};
+
+// Service de recherche des notes complètes d'un sesamien à partir de son id
+export const findSesamienFullGradesInfo = async (id: string) => {
+  return await sesamienRepository.findOne({
+    where: {
+      id,
+    },
+    relations: {
+      grades: {
+        ec: {
+          ue: true
+        }
+      }
+    },
+  });
 };
 
 // Service de recherche de tous les sesamiens

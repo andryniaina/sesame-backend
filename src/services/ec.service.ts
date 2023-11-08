@@ -1,6 +1,6 @@
 import { Ec } from "../entities/ec.entity";
 import { Ue } from "../entities/ue.entity";
-import { AppDataSource } from "../utils/app-data-source";
+import { AppDataSource } from "../config/app-data-source";
 
 // Connexion à la table ec
 const ecRepository = AppDataSource.getRepository(Ec);

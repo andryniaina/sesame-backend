@@ -1,7 +1,7 @@
 import { Grade } from "../entities/grade.entity";
 import { Ec } from "../entities/ec.entity";
 import { Sesamien } from "../entities/sesamien.entity";
-import { AppDataSource } from "../utils/app-data-source";
+import { AppDataSource } from "../config/app-data-source";
 
 // Connexion à la table note
 const gradeRepository = AppDataSource.getRepository(Grade);
@@ -56,3 +56,5 @@ export const gradeExists = async (semester: string, sesamien: Sesamien, ec: Ec) 
    })
    return !!grade.length;
 }
+
+
