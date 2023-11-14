@@ -72,7 +72,7 @@ export const filterStudentsByUeAndSemesterAndClassifyThem = (
       delete student.grades;
       return student;
     })
-    .sort((a, b) => a.average - b.average)
+    .sort((a, b) => b.average - a.average)
     .map((student, index) => ({ ...student, rank: index + 1 }));
   return structuredStudents;
 };
