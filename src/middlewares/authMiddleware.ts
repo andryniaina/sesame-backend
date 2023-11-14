@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 import { findUserById } from "../services/user.service";
 import { NextFunction, Request, Response } from "express";
+import { ROLES } from "../data/roles";
 
 export const authUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -35,3 +36,15 @@ export const authUser = asyncHandler(
     }
   }
 );
+
+export const authRole = (role: string) => {
+  return asyncHandler(
+    async (req: Request, res: Response, next: NextFunction) => {
+      if (req["user"]["role"] !== ROLES.ADMIN && req["user"]["role"] !== role) {
+        res.status(401);
+        throw new Error("Accès non authorisé");
+      }
+      next();
+    }
+  );
+};

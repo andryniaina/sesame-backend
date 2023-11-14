@@ -4,16 +4,18 @@ import {
   findUeByIdHandler,
   findAllUeHandler,
   updateUeHandler,
-  deleteUeHandler
+  deleteUeHandler,
 } from "../controllers/ue.controller";
+import { authRole, authUser } from "../middlewares/authMiddleware";
+import { ROLES } from "../data/roles";
 
 const router = express.Router();
 
 // Définition des routes pour l'API ue
-router.post("/", createUeHandler);
-router.get("/",findAllUeHandler);
-router.get("/:id", findUeByIdHandler);
-router.put("/:id",updateUeHandler);
-router.delete("/:id",deleteUeHandler)
+router.post("/", authUser, authRole(ROLES.ADMIN), createUeHandler);
+router.get("/", authUser, authRole(ROLES.ADMIN), findAllUeHandler);
+router.get("/:id", authUser, authRole(ROLES.ADMIN), findUeByIdHandler);
+router.put("/:id", authUser, authRole(ROLES.ADMIN), updateUeHandler);
+router.delete("/:id", authUser, authRole(ROLES.ADMIN), deleteUeHandler);
 
 export default router;
