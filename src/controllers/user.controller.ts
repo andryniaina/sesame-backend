@@ -6,7 +6,7 @@ import {
   updateUser,
   deleteUser,
   findUserByEmail,
-  findAllUserByRole
+  findAllUserByRole,
 } from "../services/user.service";
 import { generateToken } from "../utils/tokenMethods";
 import { findUeById } from "../services/ue.service";
@@ -28,14 +28,17 @@ export const createUserHandler = asyncHandler(
         ueId,
       } = req.body;
 
+      // Vérification de la validité du champ ROLE
       if (!Object.values(ROLES).includes(role)) {
         res.status(400);
         throw "Role affecté invalide";
       }
-      if(role===ROLES.PROF && !ueId){
+      if (role === ROLES.PROF && !ueId) {
         res.status(400);
-        throw "Un professeur doit etre affecté à un UE"
+        throw "Un professeur doit etre affecté à un UE";
       }
+
+      // Ajout du champ UE si existant
       const additionnalProperties = {};
       if (ueId) {
         const ue = await findUeById(ueId);
@@ -71,23 +74,22 @@ export const loginUserHandler = asyncHandler(
         res.status(400);
         throw "Veuillez saisir votre mot de passe";
       }
-      const user = await findUserByEmail(email) ;
+      const user = await findUserByEmail(email);
 
-      if(!user){
-        res.status(401)
-        throw "Compte inexistant"
+      if (!user) {
+        res.status(401);
+        throw "Compte inexistant";
       }
 
-      if(password.toString()===user.password.toString()){
+      if (password.toString() === user.password.toString()) {
         res.status(200).json({
           ...user,
-          token: generateToken(user.id)
-        })
+          token: generateToken(user.id),
+        });
       } else {
         res.status(401);
-        throw "Mot de passe incorrect"
+        throw "Mot de passe incorrect";
       }
-      
     } catch (error) {
       throw new Error(error);
     }
@@ -96,19 +98,18 @@ export const loginUserHandler = asyncHandler(
 
 // API de récupération de l'user authetifié
 export const getAuthUserHandler = asyncHandler(
-  async (req:Request, res:Response) => {
+  async (req: Request, res: Response) => {
     try {
-      if(!req["user"]){
-        res.status(401)
-        throw "Non autentifié"
+      if (!req["user"]) {
+        res.status(401);
+        throw "Non autentifié";
       }
       res.status(200).json(req["user"]);
-    } catch(error){
+    } catch (error) {
       throw new Error(error);
     }
   }
-)
-
+);
 
 // API de mise à jour d'un user
 export const updateUserHandler = asyncHandler(
@@ -116,6 +117,7 @@ export const updateUserHandler = asyncHandler(
     try {
       const { id } = req.params;
       const updates = Object.keys(req.body);
+      // Liste des champs modifiables
       const allowedUpdates = [
         "name",
         "firstname",

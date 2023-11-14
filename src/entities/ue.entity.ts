@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { Ec } from "./ec.entity";
 import { User } from "./user.entity";
 
-// Schema de la table ue
+// Schema de la table ue (UNITE D ENSEIGNEMENT)
 @Entity()
 export class Ue {
   @PrimaryGeneratedColumn("uuid")

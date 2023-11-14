@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import { Ue } from "./ue.entity";
 
-// Schema de la table User
+// Schema de la table User (Utilisateur)
 @Entity()
 export class User {
   @PrimaryGeneratedColumn("uuid")

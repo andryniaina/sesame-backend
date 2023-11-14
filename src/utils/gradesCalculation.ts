@@ -1,3 +1,4 @@
+// Fonction permettant de calculer les moyennes par UE et Semestre d'un élève en ayant comme entrée la liste de ses notes
 export const regroupGradesByUEandSemester = (grades) => {
   let groups = Object.values(
     grades.reduce((a, c) => {
@@ -38,7 +39,7 @@ export const regroupGradesByUEandSemester = (grades) => {
   return groups;
 };
 
-
+//Fonction permettant de filtrer les élèves selon l'UE et le Semester, et de calculer leur rang
 export const filterStudentsByUeAndSemesterAndClassifyThem = (
   students,
   ueId,

@@ -11,7 +11,7 @@ import { ROLES } from "../data/roles";
 
 const router = express.Router();
 
-// Définition des routes pour l'API ec
+// Définition des routes pour l'API ec (Element constitutif)
 router.post("/", authUser, authRole(ROLES.ADMIN), createEcHandler);
 router.get("/", authUser, authRole(ROLES.ADMIN), findAllEcHandler);
 router.get("/:id", authUser, authRole(ROLES.ADMIN), findEcByIdHandler);

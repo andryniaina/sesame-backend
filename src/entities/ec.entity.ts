@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from "ty
 import { Ue } from "./ue.entity";
 import { Grade } from "./grade.entity";
 
-// Schema de la table ec
+// Schema de la table ec (Element Constitutif)
 @Entity()
 export class Ec {
   @PrimaryGeneratedColumn("uuid")

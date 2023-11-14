@@ -1,11 +1,9 @@
 import { Request, Response } from "express";
 import {
   createSesamien,
-  findSesamienById,
   findAllSesamien,
   updateSesamien,
   deleteSesamien,
-  findSesamienFullGradesInfo,
   findSesamienWithAverages
 } from "../services/sesamien.service";
 import { filterStudentsByUeAndSemesterAndClassifyThem } from "../utils/gradesCalculation";
@@ -39,6 +37,7 @@ export const updateSesamienHandler = asyncHandler(
     try {
       const { id } = req.params;
       const updates = Object.keys(req.body);
+      // Liste des champs modifiables
       const allowedUpdates = [
         "name",
         "firstname",
@@ -98,7 +97,9 @@ export const getSesamienAverages = asyncHandler(
     try {
       const {ueId, semester} = req.body;
       console.log(req.body)
+      //récupération des sésamiens
       let sesamiens = await findAllSesamien();
+      //filtrage par UE et semestre
       sesamiens = filterStudentsByUeAndSemesterAndClassifyThem(sesamiens,ueId,semester) ;
       res.status(200).json(sesamiens);
     } catch(error) {

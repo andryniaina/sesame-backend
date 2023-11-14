@@ -11,7 +11,7 @@ import { ROLES } from "../data/roles";
 
 const router = express.Router();
 
-// Définition des routes pour l'API ec
+// Définition des routes pour l'API grade (Notes)
 router.post("/", authUser, authRole(ROLES.PROF), createGradeHandler);
 router.get("/", findAllGradeHandler);
 router.get("/:id", findGradeByIdHandler);

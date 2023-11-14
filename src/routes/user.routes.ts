@@ -14,7 +14,7 @@ import { ROLES } from "../data/roles";
 
 const router = express.Router();
 
-// Définition des routes pour l'API user
+// Définition des routes pour l'API user (Utilisateur)
 router.post("/", createUserHandler);
 router.post("/login", loginUserHandler);
 router.get("/", authUser, authRole(ROLES.ADMIN), findAllUserHandler);

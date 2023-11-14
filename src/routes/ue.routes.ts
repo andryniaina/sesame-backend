@@ -11,7 +11,7 @@ import { ROLES } from "../data/roles";
 
 const router = express.Router();
 
-// Définition des routes pour l'API ue
+// Définition des routes pour l'API ue (Unité d'enseignement)
 router.post("/", authUser, authRole(ROLES.ADMIN), createUeHandler);
 router.get("/", authUser, authRole(ROLES.ADMIN), findAllUeHandler);
 router.get("/:id", authUser, authRole(ROLES.ADMIN), findUeByIdHandler);

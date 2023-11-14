@@ -4,6 +4,7 @@ import { findUserById } from "../services/user.service";
 import { NextFunction, Request, Response } from "express";
 import { ROLES } from "../data/roles";
 
+// Ce middleware permet d'identifier l'utilisateur via le token fourni 
 export const authUser = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     let token;
@@ -37,6 +38,7 @@ export const authUser = asyncHandler(
   }
 );
 
+// Ce middleware permet d'autoriser l'accès à une requete selon le role de l'utilisateur connecté (ADMIN est autorisé à tout)
 export const authRole = (role: string) => {
   return asyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
