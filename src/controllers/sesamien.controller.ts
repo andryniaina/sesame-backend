@@ -8,6 +8,7 @@ import {
   findSesamienFullGradesInfo,
   findSesamienWithAverages
 } from "../services/sesamien.service";
+import { filterStudentsByUeAndSemesterAndClassifyThem } from "../utils/gradesCalculation";
 import asyncHandler from "express-async-handler";
 
 // API de création d'un sesamien
@@ -90,6 +91,21 @@ export const findAllSesamienHandler = asyncHandler(
     }
   }
 );
+
+// API de récupération des sésamiens et de leurs moyennes selon l'UE et le semestre
+export const getSesamienAverages = asyncHandler(
+  async (req: Request, res: Response)=> {
+    try {
+      const {ueId, semester} = req.body;
+      console.log(req.body)
+      let sesamiens = await findAllSesamien();
+      sesamiens = filterStudentsByUeAndSemesterAndClassifyThem(sesamiens,ueId,semester) ;
+      res.status(200).json(sesamiens);
+    } catch(error) {
+      throw new Error(error) ;
+    }
+  }
+)
 
 // API de suppression d'un sesamien
 export const deleteSesamienHandler = asyncHandler(
