@@ -22,6 +22,9 @@ export class Grade {
   @Column("decimal", { precision: 6, scale: 2 })
   ct: number;
 
+  @Column("decimal", { precision: 6, scale: 2 })
+  average: number;
+
   @Column({ default: "Semestre 1" })
   semester: string;
 }

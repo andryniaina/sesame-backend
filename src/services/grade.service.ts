@@ -7,8 +7,17 @@ import { AppDataSource } from "../config/app-data-source";
 const gradeRepository = AppDataSource.getRepository(Grade);
 
 // Service de création d'une note
-export const createGrade = async (input: Partial<Grade>, sesamien:Sesamien, ec:Ec) => {
-  return await gradeRepository.save(gradeRepository.create({ ...input, sesamien, ec }));
+export const createGrade = async (
+  input: Partial<Grade>,
+  sesamien: Sesamien,
+  ec: Ec
+) => {
+  const gradeCt: number = parseFloat(input.ct.toString());
+  const gradeCc: number = parseFloat(input.cc.toString());
+  const average: number = (gradeCt + gradeCc) / 2;
+  return await gradeRepository.save(
+    gradeRepository.create({ ...input, average, sesamien, ec })
+  );
 };
 
 // Service de mise à jour d'une note
@@ -25,7 +34,7 @@ export const findGradeById = async (id: string) => {
     },
     relations: {
       sesamien: true,
-      ec: true
+      ec: true,
     },
   });
 };
@@ -35,7 +44,7 @@ export const findAllGrade = async () => {
   return await gradeRepository.find({
     relations: {
       sesamien: true,
-      ec: true
+      ec: true,
     },
   });
 };
@@ -46,15 +55,17 @@ export const deleteGrade = async (id: string) => {
 };
 
 // Vérification si la note existe déjà
-export const gradeExists = async (semester: string, sesamien: Sesamien, ec: Ec) =>{
-   const grade = await gradeRepository.find({
+export const gradeExists = async (
+  semester: string,
+  sesamien: Sesamien,
+  ec: Ec
+) => {
+  const grade = await gradeRepository.find({
     where: {
-        semester,
-        sesamien,
-        ec
-    }
-   })
-   return !!grade.length;
-}
-
-
+      semester,
+      sesamien,
+      ec,
+    },
+  });
+  return !!grade.length;
+};

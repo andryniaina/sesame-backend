@@ -9,6 +9,7 @@ import sesamienRouter from "./routes/sesamien.routes";
 import ueRouter from "./routes/ue.routes";
 import ecRouter from "./routes/ec.routes";
 import gradeRouter from "./routes/grade.routes";
+import userRouter from "./routes/user.routes";
 
 // Initialisation de la connexion à la base de données
 AppDataSource.initialize()
@@ -30,6 +31,7 @@ AppDataSource.initialize()
     app.use("/api/ue", ueRouter);
     app.use("/api/ec", ecRouter);
     app.use("/api/grade", gradeRouter);
+    app.use("/api/user", userRouter);
 
     // Utilisation du middleware de gestion d'erreur
     app.use(errorHandler);

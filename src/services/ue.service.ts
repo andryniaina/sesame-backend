@@ -17,7 +17,7 @@ export const updateUe = async (id: string, input: Partial<Ue>) => {
 
 // Service de recherche d'un ue à partir de son id
 export const findUeById = async (id: string) => {
-  return await ueRepository.findOne({
+  return await ueRepository.findOneOrFail({
     where: {
       id,
     },

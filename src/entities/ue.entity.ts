@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { Ec } from "./ec.entity";
+import { User } from "./user.entity";
 
 // Schema de la table ue
 @Entity()
@@ -12,4 +13,7 @@ export class Ue {
 
   @OneToMany(() => Ec, (ec) => ec.ue)
   ecs: Ec[];
+
+  @OneToMany(() => User, (user) => user.ue)
+  users: User[];
 }

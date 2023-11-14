@@ -1,5 +1,6 @@
 import { Sesamien } from "../entities/sesamien.entity";
 import { AppDataSource } from "../config/app-data-source";
+import { regroupGradesByUEandSemester } from "../utils/gradesCalculation";
 
 // Connexion à la table sesamien
 const sesamienRepository = AppDataSource.getRepository(Sesamien);
@@ -17,12 +18,12 @@ export const updateSesamien = async (id: string, input: Partial<Sesamien>) => {
 
 // Service de recherche d'un sesamien à partir de son id
 export const findSesamienById = async (id: string) => {
-  return await sesamienRepository.findOneBy({ id });
+  return await sesamienRepository.findOneByOrFail({ id });
 };
 
 // Service de recherche des notes complètes d'un sesamien à partir de son id
 export const findSesamienFullGradesInfo = async (id: string) => {
-  return await sesamienRepository.findOne({
+  return await sesamienRepository.findOneOrFail({
     where: {
       id,
     },
@@ -36,9 +37,12 @@ export const findSesamienFullGradesInfo = async (id: string) => {
   });
 };
 
-// Service de recherche de tous les sesamiens
-export const findAllSesamien = async () => {
-  return await sesamienRepository.find({
+// Service de recherche d'un sesamien avec ses moyennes par UE et Semestre à partir de son id
+export const findSesamienWithAverages = async (id: string) => {
+  const response = await sesamienRepository.findOneOrFail({
+    where: {
+      id,
+    },
     relations: {
       grades: {
         ec: {
@@ -47,6 +51,28 @@ export const findAllSesamien = async () => {
       },
     },
   });
+  let sesamien:any = {...response}
+  sesamien["averages"] = regroupGradesByUEandSemester(sesamien.grades) ;
+  return sesamien ;
+};
+
+// Service de recherche de tous les sesamiens
+export const findAllSesamien = async () => {
+  const response = await sesamienRepository.find({
+    relations: {
+      grades: {
+        ec: {
+          ue: true,
+        },
+      },
+    },
+  });
+  let sesamiens:any[] = [...response] ;
+  sesamiens = sesamiens.map((sesamien)=>{
+    sesamien["averages"] = regroupGradesByUEandSemester(sesamien.grades)
+    return sesamien;
+  })
+  return sesamiens;
 };
 
 // Service de suppression d'un sesamien

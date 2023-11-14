@@ -18,7 +18,7 @@ export const updateEc = async (id: string, input: Partial<Ec>) => {
 
 // Service de recherche d'un ec à partir de son id
 export const findEcById = async (id: string) => {
-  return await ecRepository.findOne({
+  return await ecRepository.findOneOrFail({
     where: {
       id,
     },

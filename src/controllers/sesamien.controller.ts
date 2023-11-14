@@ -5,7 +5,8 @@ import {
   findAllSesamien,
   updateSesamien,
   deleteSesamien,
-  findSesamienFullGradesInfo
+  findSesamienFullGradesInfo,
+  findSesamienWithAverages
 } from "../services/sesamien.service";
 import asyncHandler from "express-async-handler";
 
@@ -70,7 +71,7 @@ export const findSesamienByIdHandler = asyncHandler(
   async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-      const sesamien = await findSesamienFullGradesInfo(id);
+      const sesamien = await findSesamienWithAverages(id);
       res.status(200).json(sesamien);
     } catch (error) {
       throw new Error(error);
