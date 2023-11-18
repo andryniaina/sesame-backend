@@ -10,11 +10,16 @@ import ueRouter from "./routes/ue.routes";
 import ecRouter from "./routes/ec.routes";
 import gradeRouter from "./routes/grade.routes";
 import userRouter from "./routes/user.routes";
+import { insterdata } from "./data/initializeData";
 
 // Initialisation de la connexion à la base de données
 AppDataSource.initialize()
-  .then(() => {
+  .then(async() => {
     console.log("Connexion à la base de données réussie");
+
+    //Insertion des données initiales
+    await insterdata() ;
+    
     // Creation de l'application Express
     const app = express();
     const port = process.env.PORT || 5000;

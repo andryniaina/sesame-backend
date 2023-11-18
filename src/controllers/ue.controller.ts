@@ -12,9 +12,11 @@ import asyncHandler from "express-async-handler";
 export const createUeHandler = asyncHandler(
   async (req: Request, res: Response) => {
     try {
-      const { name } = req.body;
+      const { name, code, mention } = req.body;
       const ue = await createUe({
         name,
+        code,
+        mention,
       });
       res.status(201).json(ue);
     } catch (error) {
@@ -29,7 +31,7 @@ export const updateUeHandler = asyncHandler(
     try {
       const { id } = req.params;
       const updates = Object.keys(req.body);
-      const allowedUpdates = ["name"];
+      const allowedUpdates = ["name", "code", "mention"];
       const isValidOperation = updates.every((update) =>
         allowedUpdates.includes(update)
       );

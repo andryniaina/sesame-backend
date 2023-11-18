@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, Code } from "typeorm";
 import { Ec } from "./ec.entity";
 import { User } from "./user.entity";
 
@@ -9,7 +9,13 @@ export class Ue {
   id: string;
 
   @Column()
+  code: string;
+
+  @Column()
   name: string;
+
+  @Column()
+  mention: string;
 
   @OneToMany(() => Ec, (ec) => ec.ue)
   ecs: Ec[];
