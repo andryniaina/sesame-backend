@@ -776,10 +776,10 @@ const data = [
 const groupByUE = (data) => {
   return Object.values(
     data.reduce((a, c) => {
-      if (a.hasOwnProperty(c["Code UE"])) {
-        a[c["Code UE"]].push(c);
+      if (a.hasOwnProperty(c["Nom UE"])) {
+        a[c["Nom UE"]].push(c);
       } else {
-        a[c["Code UE"]] = [c];
+        a[c["Nom UE"]] = [c];
       }
       return a;
     }, {})
